@@ -49,6 +49,7 @@ public class ClienteController {
     }
 
     private void listar() {
+        System.out.println("Se llamara al DAO");
         vista.mostrarListaClientes(dao.listarTodos());
     }
 

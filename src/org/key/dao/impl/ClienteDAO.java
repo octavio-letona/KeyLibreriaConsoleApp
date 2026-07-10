@@ -11,14 +11,13 @@ import org.key.model.Cliente;
  *
  * @author informatica
  */
+//Interfaz  no se pude crear como objeto, contrato 
 public interface ClienteDAO {
     //firmas de metodos
     //CRUD
-    boolean insertar(Cliente cliente);
-    List<Cliente> listar();
-    Cliente buscar(long cui);
-    boolean crear(Cliente cliente);
+    boolean eliminar(long cui);        
+    boolean actualizar(Cliente cliente);
+    boolean crear(Cliente cliente);    
     List<Cliente> listarTodos();
     Cliente buscarPorId(long cui);
-    boolean actualizar(Cliente cliente);
 }

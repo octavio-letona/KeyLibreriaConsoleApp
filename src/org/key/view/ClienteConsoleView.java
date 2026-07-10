@@ -70,9 +70,10 @@ public class ClienteConsoleView {
         System.out.printf("%-10s %-10s %-10s %-10s", "CUI","NOMBRE","APELLIDO","CORREO");
         
         for (Cliente cliente : clientes) {
-            System.out.printf("%-10s %-10s %-10s %-10s",
+            System.out.printf("%-10s %-10s %-10s %-10s\n",
                     cliente.getCui(), cliente.getNombre(), cliente.getApellido(), cliente.getCorreoElectronico());
         }
+        System.out.println("LISTA DE CLIENTES FINALIZADA");
     }
     
     //para mostrar mensaje personalizado

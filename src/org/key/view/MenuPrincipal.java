@@ -24,7 +24,7 @@ public class MenuPrincipal {
             
             switch (opcion) {
                 case 1:
-                        System.out.println("Cliente");
+                        
                         ClienteConsoleView vistaCliente = new ClienteConsoleView();
                         ClienteController controladorCliente = new ClienteController(vistaCliente);
                         controladorCliente.iniciar();

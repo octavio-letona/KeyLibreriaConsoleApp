@@ -47,21 +47,13 @@ public class ClienteDAOImpl implements ClienteDAO {
         //retornamos la lista
         return clientes;
     }
-    
-    @Override
-    public boolean insertar(Cliente cliente) {
-        return false; 
-    } 
+
 
     @Override
     public boolean crear(Cliente cliente) {
         return false;
     }
-    
-    @Override
-    public Cliente buscar(long cui) {
-        return null;
-    }
+
 
     @Override
     public Cliente buscarPorId(long cui) {
@@ -103,8 +95,5 @@ public class ClienteDAOImpl implements ClienteDAO {
         return false;
     }
 
-    @Override
-    public List<Cliente> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
+    
 }
