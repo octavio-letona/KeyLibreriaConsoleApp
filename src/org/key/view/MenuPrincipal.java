@@ -9,5 +9,9 @@ package org.key.view;
  * @author informatica
  */
 public class MenuPrincipal {
+
+    public void iniciar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
