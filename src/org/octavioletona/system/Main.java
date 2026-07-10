@@ -8,11 +8,7 @@ import org.key.view.MenuPrincipal;
 
 /**
  *
-import org.key.view.MenuPrincipal;
-
-/**
- *
- * @author 
+ 
  */
 public class Main {
 
