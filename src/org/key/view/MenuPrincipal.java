@@ -6,6 +6,7 @@ package org.key.view;
 
 
 import java.util.Scanner;
+import org.octavioletona.controller.ClienteController;
 
 public class MenuPrincipal {
     Scanner leer = new Scanner(System.in);
@@ -23,7 +24,10 @@ public class MenuPrincipal {
             
             switch (opcion) {
                 case 1:
-                    System.out.println("Cliente");
+                        System.out.println("Cliente");
+                        ClienteConsoleView vistaCliente = new ClienteConsoleView();
+                        ClienteController controladorCliente = new ClienteController(vistaCliente);
+                        controladorCliente.iniciar();
                     break;
                 case 2:
                     System.out.println("Autor");

@@ -19,23 +19,19 @@ import java.sql.SQLException;
  *
  * @author informatica
  */
-public class ClienteDAOImpl implements ClienteDAO{
+public class ClienteDAOImpl implements ClienteDAO {
 
-     @Override
+    @Override
     public List<Cliente> listarTodos() {
         //crear lista
-        List<Cliente> clientes = new ArrayList<>();//null
-        //crear nustras consulta
+        List<Cliente> clientes = new ArrayList<>();
+        //crear nuestra consulta
         String consulta = "{call sp_listarclientes()}";
-        //maperar el resultado de la consulta a objeto y lo agregamos a la lista
-        //try with resources / intentar con recursos --> cierra el recurso al completar el intento
-        //recurso: Conexion, al final se cierra
+        
         try (Connection conexion = Conexion.getInstancia().conectar();
                 CallableStatement consultaCall = conexion.prepareCall(consulta);
                 ResultSet tablaResultado = consultaCall.executeQuery();) {
-            //ciclo para rellenar mi lista
-            //verificar cada filta del result set
-            //va a guarda cada celda dentro de cada atributo de mi objeto
+            
             while (tablaResultado.next()) {
                 clientes.add(new Cliente(
                         tablaResultado.getLong("cui"),
@@ -44,29 +40,71 @@ public class ClienteDAOImpl implements ClienteDAO{
                         tablaResultado.getString("correo_electronico")
                 ));
             }
-         } catch (SQLException e) {
-             System.err.print("Error al listar Clientes: " + e.getMessage());
-         }
+        } catch (SQLException e) {
+            System.err.print("Error al listar Clientes: " + e.getMessage());
+        }
         
-        //retornamos un alista
+        //retornamos la lista
         return clientes;
     }
     
     @Override
     public boolean insertar(Cliente cliente) {
-     @Override
+        return false; 
+    } 
+
+    @Override
     public boolean crear(Cliente cliente) {
+        return false;
+    }
+    
+    @Override
+    public Cliente buscar(long cui) {
+        return null;
+    }
+
+    @Override
+    public Cliente buscarPorId(long cui) {
+        // Se quitó el return null que bloqueaba el código 🌟
+        Cliente cliente = new Cliente();
+
+        //consulta
+        String consultaSQL = "{call sp_buscarcliente(?)}";
+        
+        try (Connection conexion = Conexion.getInstancia().conectar(); 
+             CallableStatement consultaCall = conexion.prepareCall(consultaSQL);) {
+            
+            consultaCall.setLong(1, cui);
+            ResultSet tablaResultado = consultaCall.executeQuery();
+            
+            if (tablaResultado.next()) {
+                cliente.setCui(tablaResultado.getLong("cui"));
+                cliente.setNombre(tablaResultado.getString("nombre_cliente"));
+                cliente.setApellido(tablaResultado.getString("apellido_cliente"));
+                cliente.setCorreoElectronico(tablaResultado.getString("correo_electronico"));
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            System.err.print("Error al buscar Cliente: " + e.getMessage());
+        }
+        
+        //retornamos el objeto
+        return cliente;
+    }
+
+    @Override
+    public boolean actualizar(Cliente cliente) {
+        // Se cerró el método correctamente con su retorno temporal 🌟
+        return false;
+    }
+
+    public boolean eliminar(long cui) {
         return false;
     }
 
     @Override
-     List<Cliente> listar() {
-        return null;
+    public List<Cliente> listar() {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
-   
-
-    @Override
-    public Cliente buscar(long cui) {
-    public Cliente buscarPorId(long cui) {
-        return null;
-    }
+}
