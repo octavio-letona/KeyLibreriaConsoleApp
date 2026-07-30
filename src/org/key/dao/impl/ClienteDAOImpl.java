@@ -57,7 +57,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public Cliente buscarPorId(long cui) {
-        // Se quitó el return null que bloqueaba el código 🌟
+        // Se quitó el return null que bloqueaba el código ?
         Cliente cliente = new Cliente();
 
         //consulta
@@ -87,7 +87,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public boolean actualizar(Cliente cliente) {
-        // Se cerró el método correctamente con su retorno temporal 🌟
+        // Se cerró el método correctamente con su retorno temporal 
         return false;
     }
 

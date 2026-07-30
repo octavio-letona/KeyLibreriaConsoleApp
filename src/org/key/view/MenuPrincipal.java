@@ -7,6 +7,7 @@ package org.key.view;
 
 import java.util.Scanner;
 import org.octavioletona.controller.ClienteController;
+import org.octavioletona.controller.EditorialController;
 
 public class MenuPrincipal {
     Scanner leer = new Scanner(System.in);
@@ -40,6 +41,9 @@ public class MenuPrincipal {
                     break;   
                 case 5:
                     System.out.println("Editoriales");
+                    EditorialConsoleView vistaEditorial = new EditorialConsoleView();
+                    EditorialController controladorEditorial = new EditorialController(vistaEditorial);
+                    controladorEditorial.iniciar();
                     break;
                 default:
                     System.out.println("NO existe esta opción");
