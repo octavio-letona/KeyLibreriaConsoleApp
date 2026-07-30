@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package org.key.view;
 
 import java.util.List;
@@ -11,12 +10,12 @@ import org.key.model.Editorial;
 
 public class EditorialConsoleView {
 
-    private final Scanner leer = new Scanner(System.in);
+    // Unificado a 'scanner'
+    private final Scanner scanner = new Scanner(System.in);
 
     // método para mostrar las opciones de este menú
     public int mostrarMenu() {
         int opcion = 0;
-        // todo el menú
         System.out.println("--- GESTIÓN DE EDITORIALES ---");
         System.out.println("-1 CREAR nueva Editorial ---");
         System.out.println("-2 LISTAR todas las Editoriales ---");
@@ -25,31 +24,31 @@ public class EditorialConsoleView {
         System.out.println("-5 ELIMINAR Editorial ---");
         System.out.println("-6 REGRESAR a menú PRINCIPAL ---");
         System.out.print("SELECCIONE UNA OPCIÓN --> ");
-        opcion = Integer.parseInt(leer.nextLine());
+        opcion = Integer.parseInt(scanner.nextLine());
         return opcion;
     }
 
     public String solicitarNIT() {
         System.out.println("Ingrese el NIT de la editorial: ");
-        return leer.nextLine();
+        return scanner.nextLine();
     }
 
     // nombreEditorial
     public String solicitarNombreEditorial() {
         System.out.println("Ingrese el NOMBRE de la editorial: ");
-        return leer.nextLine();
+        return scanner.nextLine();
     }
 
     // telefonoEditorial
     public String solicitarTelefonoEditorial() {
         System.out.println("Ingrese el TELÉFONO de la editorial: ");
-        return leer.nextLine();
+        return scanner.nextLine();
     }
 
     // direccionEditorial
     public String solicitarDireccionEditorial() {
         System.out.println("Ingrese la DIRECCIÓN de la editorial: ");
-        return leer.nextLine();
+        return scanner.nextLine();
     }
 
     // mostrar el detalle de una EDITORIAL
@@ -64,7 +63,6 @@ public class EditorialConsoleView {
     // mostrar la lista de EDITORIALES -- lista de objeto List<Editorial>
     public void mostrarListaEditoriales(List<Editorial> editoriales) {
         System.out.println("--- LISTA DE EDITORIALES ---");
-        // tabla usando la propiedad %-[tamaño de columna]s
         System.out.printf("%-15s %-25s %-15s %-30s\n", "NIT", "NOMBRE", "TELÉFONO", "DIRECCIÓN");
 
         for (Editorial editorial : editoriales) {
@@ -82,7 +80,7 @@ public class EditorialConsoleView {
         System.out.println(mensaje);
     }
 
-public boolean confirmarEliminacion() {
+    public boolean confirmarEliminacion() {
         System.out.print("¿Está seguro de que desea eliminar esta editorial? (S/N): ");
         String respuesta = scanner.nextLine().trim();
         return respuesta.equalsIgnoreCase("S") || respuesta.equalsIgnoreCase("SI");
@@ -90,7 +88,7 @@ public boolean confirmarEliminacion() {
 
     public Editorial solicitarDatosNuevaEditorial() {
         System.out.println("\n=== REGISTRAR NUEVA EDITORIAL ===");
-        
+
         System.out.print("Ingrese el NIT: ");
         String nit = scanner.nextLine().trim();
 
