@@ -4,7 +4,6 @@
  */
 package org.key.controller;
 
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -19,6 +18,17 @@ public class MenuPrincipalController {
             Main.cambiarVista("/org/key/view/ClienteView.fxml");
         } catch (Exception e) {
             mostrarError("Error al cargar la vista de clientes:\n" + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleEditorial() {
+        try {
+            // Verifica que este nombre de archivo coincida con mayúsculas y minúsculas exactas
+            Main.cambiarVista("/org/key/view/EditorialView.fxml");
+        } catch (Exception e) {
+            e.printStackTrace(); // <-- ESTO IMPRIMIRÁ EL ERROR REAL EN LA CONSOLA
+            mostrarError("Error al cargar la vista de editoriales:\n" + e.toString());
         }
     }
 

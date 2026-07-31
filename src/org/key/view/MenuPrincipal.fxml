@@ -18,7 +18,7 @@
             <Button text="Clientes" prefWidth="220" prefHeight="40" onAction="#handleClientes" />
             <Button text="Autores" prefWidth="220" prefHeight="40" onAction="#handleNoDisponible" />
             <Button text="Categorías" prefWidth="220" prefHeight="40" onAction="#handleNoDisponible" />
-            <Button text="Editoriales" prefWidth="220" prefHeight="40" onAction="#handleNoDisponible" />
+            <Button text="Editoriales" prefWidth="220" prefHeight="40" onAction="#handleEditorial" />
             <Button text="Salir" prefWidth="220" prefHeight="40" onAction="#handleSalir" />
         </VBox>
     </center>

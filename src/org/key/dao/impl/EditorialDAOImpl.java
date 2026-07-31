@@ -49,7 +49,18 @@ public class EditorialDAOImpl implements EditorialDAO {
 
     @Override
     public boolean crear(Editorial editorial) {
-        return false;
+         String consulta = "{call sp_insertareditorial(?, ?, ?, ?)}";
+        try (Connection conexion = Conexion.getInstancia().conectar();
+             CallableStatement consultaCall = conexion.prepareCall(consulta)) {
+            consultaCall.setString(1, editorial.getNit());
+            consultaCall.setString(2, editorial.getNombreEditorial());
+            consultaCall.setString(3, editorial.getTelefonoEditorial());
+            consultaCall.setString(4, editorial.getDireccionEditorial());
+            return consultaCall.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.print("Error al crear Editorial: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
