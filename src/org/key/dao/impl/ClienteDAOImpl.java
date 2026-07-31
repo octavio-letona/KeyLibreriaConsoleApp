@@ -51,7 +51,18 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public boolean crear(Cliente cliente) {
-        return false;
+                String consulta = "{call sp_insertarcliente(?, ?, ?, ?)}";
+        try (Connection conexion = Conexion.getInstancia().conectar();
+             CallableStatement consultaCall = conexion.prepareCall(consulta)) {
+            consultaCall.setLong(1, cliente.getCui());
+            consultaCall.setString(2, cliente.getNombre());
+            consultaCall.setString(3, cliente.getApellido());
+            consultaCall.setString(4, cliente.getCorreoElectronico());
+            return consultaCall.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.print("Error al crear Cliente: " + e.getMessage());
+            return false;
+        }
     }
 
 
