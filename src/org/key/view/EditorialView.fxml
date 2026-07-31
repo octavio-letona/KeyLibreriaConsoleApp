@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.EditorialFXController">
+<BorderPane stylesheets="@editorialview.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.EditorialFXController">
     <padding><Insets top="20" right="20" bottom="20" left="20" /></padding>
 
     <left>
