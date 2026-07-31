@@ -36,7 +36,7 @@ public class EditorialDAOImpl implements EditorialDAO {
                         tablaResultado.getString("nit"),
                         tablaResultado.getString("nombre_editorial"),
                         tablaResultado.getString("telefono_editorial"),
-                        tablaResultado.getString("direccion_editorial")
+                        tablaResultado.getString("direccion_editoria")
                 ));
             }
         } catch (SQLException e) {
@@ -80,7 +80,7 @@ public class EditorialDAOImpl implements EditorialDAO {
                 editorial.setNit(tablaResultado.getString("nit"));
                 editorial.setNombreEditorial(tablaResultado.getString("nombre_editorial"));
                 editorial.setTelefonoEditorial(tablaResultado.getString("telefono_editorial"));
-                editorial.setDireccionEditorial(tablaResultado.getString("direccion_editorial"));
+                editorial.setDireccionEditorial(tablaResultado.getString("direccion_editoria"));
             } else {
                 return null;
             }

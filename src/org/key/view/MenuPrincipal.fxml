@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.MenuPrincipalController">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.MenuPrincipalController"
+    stylesheets="@menuprincipal.css">
     <top>
         <Label text="Key Librería - Menú Principal" style="-fx-font-size: 24; -fx-font-weight: bold;" BorderPane.alignment="CENTER">
             <padding><Insets top="20" /></padding>
@@ -16,8 +17,8 @@
         <VBox spacing="15" alignment="CENTER">
             <padding><Insets top="30" right="40" bottom="30" left="40" /></padding>
             <Button text="Clientes" prefWidth="220" prefHeight="40" onAction="#handleClientes" />
-            <Button text="Autores" prefWidth="220" prefHeight="40" onAction="#handleNoDisponible" />
-            <Button text="Categorías" prefWidth="220" prefHeight="40" onAction="#handleNoDisponible" />
+            <Button text="Autores" prefWidth="220" prefHeight="40" onAction="#handleAutores" />
+            <Button text="Categorías" prefWidth="220" prefHeight="40" onAction="#handleCategorias" />
             <Button text="Editoriales" prefWidth="220" prefHeight="40" onAction="#handleEditorial" />
             <Button text="Salir" prefWidth="220" prefHeight="40" onAction="#handleSalir" />
         </VBox>

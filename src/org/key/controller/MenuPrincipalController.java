@@ -19,6 +19,7 @@ public class MenuPrincipalController {
         } catch (Exception e) {
             mostrarError("Error al cargar la vista de clientes:\n" + e.getMessage());
         }
+        
     }
 
     @FXML
@@ -27,7 +28,27 @@ public class MenuPrincipalController {
             // Verifica que este nombre de archivo coincida con mayúsculas y minúsculas exactas
             Main.cambiarVista("/org/key/view/EditorialView.fxml");
         } catch (Exception e) {
-            e.printStackTrace(); // <-- ESTO IMPRIMIRÁ EL ERROR REAL EN LA CONSOLA
+            mostrarError("Error al cargar la vista de editoriales:\n" + e.toString());
+        }
+    }
+    
+    @FXML
+    private void handleAutores() {
+        try {
+            // Verifica que este nombre de archivo coincida con mayúsculas y minúsculas exactas
+            Main.cambiarVista("/org/key/view/EditorialView.fxml");
+        } catch (Exception e) {
+            mostrarError("Error al cargar la vista de editoriales:\n" + e.toString());
+        }
+    }
+    
+    
+        @FXML
+    private void handleCategorias() {
+        try {
+            // Verifica que este nombre de archivo coincida con mayúsculas y minúsculas exactas
+            Main.cambiarVista("/org/key/view/EditorialView.fxml");
+        } catch (Exception e) {
             mostrarError("Error al cargar la vista de editoriales:\n" + e.toString());
         }
     }

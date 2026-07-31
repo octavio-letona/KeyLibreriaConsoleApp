@@ -33,7 +33,7 @@ public class EditorialFXController implements Initializable {
     private Label lblMensaje;
     @FXML
     private TableView<Editorial> tablaEditorial;
-    
+
     private final EditorialDAO editorialDAO = new EditorialDAOImpl();
     private final ObservableList<Editorial> listaEditoriales = FXCollections.observableArrayList();
 
@@ -42,7 +42,7 @@ public class EditorialFXController implements Initializable {
         cargarTabla();
         seleccionarFila();
     }
-    
+
     private void cargarTabla() {
         listaEditoriales.setAll(editorialDAO.listarTodos());
         tablaEditorial.setItems(listaEditoriales);
@@ -50,17 +50,17 @@ public class EditorialFXController implements Initializable {
 
     private void seleccionarFila() {
         tablaEditorial.getSelectionModel().selectedItemProperty().addListener(
-            (obs, oldSelection, newSelection) -> {
-                if (newSelection != null) {
-                    txtNitEditorial.setText(String.valueOf(newSelection.getNit()));
-                    txtNombreEditorial.setText(newSelection.getNombreEditorial());
-                    txtTelefonoEditorial.setText(newSelection.getTelefonoEditorial());
-                    txtDireccionEditorial.setText(newSelection.getDireccionEditorial());
+                (obs, oldSelection, newSelection) -> {
+                    if (newSelection != null) {
+                        txtNitEditorial.setText(String.valueOf(newSelection.getNit()));
+                        txtNombreEditorial.setText(newSelection.getNombreEditorial());
+                        txtTelefonoEditorial.setText(newSelection.getTelefonoEditorial());
+                        txtDireccionEditorial.setText(newSelection.getDireccionEditorial());
+                    }
                 }
-            }
         );
     }
-    
+
     @FXML
     private void handleGuardar() {
         try {
@@ -126,6 +126,3 @@ public class EditorialFXController implements Initializable {
         alert.showAndWait();
     }
 }
-    
-    
-
