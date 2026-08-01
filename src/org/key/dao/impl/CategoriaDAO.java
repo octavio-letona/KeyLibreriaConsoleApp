@@ -12,9 +12,9 @@ import org.key.model.Categoria;
 public interface CategoriaDAO {
     //firmas de metodos
     //CRUD
-    boolean eliminar(String Id);        
+    boolean eliminar(int Id);        
     boolean actualizar(Categoria categoria);
     boolean crear(Categoria categoria);    
     List<Categoria> listarTodos();
-    Categoria buscarPorId(String Id);
+    Categoria buscarPorId(int Id);
 }

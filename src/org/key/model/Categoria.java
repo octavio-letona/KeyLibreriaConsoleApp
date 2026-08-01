@@ -10,7 +10,7 @@ public class Categoria {
 
 
     //atributos de clase
-    String Id;
+    int Id;
     String nombre_categoria;
 
 
@@ -19,7 +19,7 @@ public class Categoria {
     public Categoria() {
     }
     //lleno o con parametros
-    public Categoria(String Id, String nombre_categoria) {
+    public Categoria(int Id, String nombre_categoria) {
         this.Id = Id;
         this.nombre_categoria = nombre_categoria;
 
@@ -29,11 +29,11 @@ public class Categoria {
     
     //getter and setters
 
-    public String getId() {
+    public int getId() {
         return Id;
     }
 
-    public void setId(String Id) {
+    public void setId(int Id) {
         this.Id = Id;
     }
 

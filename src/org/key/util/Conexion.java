@@ -14,7 +14,7 @@ public class Conexion {
     
     // Configuración del string de conexión, y credenciales
     private static final String URL = 
-            "jdbc:mysql://localhost:3306/sistema_login";
+            "jdbc:mysql://localhost:3306/libreriadb_in4cm?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PASSWORD = "Lola09.";
      

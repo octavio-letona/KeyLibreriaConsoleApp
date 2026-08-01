@@ -1,5 +1,109 @@
+/* --- Estilo General / Fondo --- */
+.root {
+    -fx-background-color: #F8FAFC;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
 
+/* --- Títulos y Labels --- */
+.label {
+    -fx-text-fill: #1E293B;
+}
 
-.mainFxmlClass {
+/* Mensaje de estado (lblMensaje) */
+#lblMensaje {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #059669; /* Verde para confirmaciones */
+}
 
+/* --- Campos de Texto (TextField) --- */
+.text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CBD5E1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: #0F172A;
+    -fx-prompt-text-fill: #94A3B8;
+}
+
+.text-field:focused {
+    -fx-border-color: #2563EB;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 99, 235, 0.2), 5, 0, 0, 0);
+}
+
+/* --- Botones --- */
+.button {
+    -fx-background-color: #2563EB;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #1D4ED8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.12), 4, 0, 0, 2);
+}
+
+.button:pressed {
+    -fx-background-color: #1E40AF;
+    -fx-effect: none;
+}
+
+/* --- Tabla de Categorías (TableView) --- */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+/* Encabezado de la Tabla */
+.table-view .column-header-background {
+    -fx-background-color: #E2E8F0;
+    -fx-background-radius: 6 6 0 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 38px;
+    -fx-border-color: transparent #CBD5E1 transparent transparent;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #334155;
+    -fx-alignment: center-left;
+}
+
+/* Filas de la Tabla */
+.table-row-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #F1F5F9 transparent;
+    -fx-cell-size: 36px;
+}
+
+/* Cebra (filas alternas) */
+.table-row-cell:odd {
+    -fx-background-color: #F8FAFC;
+}
+
+/* Estado Hover en Filas */
+.table-row-cell:hover {
+    -fx-background-color: #EFF6FF;
+}
+
+/* Fila Seleccionada */
+.table-row-cell:selected {
+    -fx-background-color: #2563EB;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: #FFFFFF;
 }

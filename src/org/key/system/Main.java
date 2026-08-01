@@ -28,8 +28,11 @@ public class Main extends Application {
         launch(args);
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+@Override
+public void start(Stage stage) throws Exception {
+    escenarioPrincipal = stage;
+    cambiarVista("/org/key/view/CategoriaView.fxml"); // Abre directamente la vista de categorías
+    stage.setTitle("Key Librería - Categorías");
+    stage.show();
+}
 }

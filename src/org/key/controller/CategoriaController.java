@@ -50,7 +50,6 @@ public class CategoriaController implements Initializable {
         tablaCategoria.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> {
                     if (newSelection != null) {
-                        // Asegúrate de que tu clase Categoria tenga los métodos getId() y getNombre_categoria()
                         txtID_categoria.setText(String.valueOf(newSelection.getId()));
                         txtNombre_categoria.setText(newSelection.getNombre_categoria());
                     }
@@ -60,15 +59,12 @@ public class CategoriaController implements Initializable {
     @FXML
     private void handleGuardar() {
         try {
-            // CORREGIDO: Faltaba cerrar un paréntesis derecho en la condición
-            if (txtID_categoria.getText().isEmpty() || txtNombre_categoria.getText().isEmpty()) {
-                mostrarError("Todos los campos son obligatorios.");
+            if (txtNombre_categoria.getText().isEmpty()) {
+                mostrarError("El nombre de la categoría es obligatorio.");
                 return;
             }
 
-            // CORREGIDO: Se eliminó el uso incorrecto de 'tablaResultado' en el controlador
             Categoria categoria = new Categoria();
-            categoria.setId(txtID_categoria.getText().trim());
             categoria.setNombre_categoria(txtNombre_categoria.getText().trim());
 
             if (categoriaDAO.crear(categoria)) {
@@ -91,14 +87,35 @@ public class CategoriaController implements Initializable {
 
     @FXML
     private void handleActualizar() {
-        cargarTabla();
-        lblMensaje.setText("Tabla actualizada.");
+        try {
+            if (txtID_categoria.getText().isEmpty() || txtNombre_categoria.getText().isEmpty()) {
+                mostrarError("Seleccione una categoría para actualizar.");
+                return;
+            }
+
+            Categoria categoria = new Categoria();
+            categoria.setId(Integer.parseInt(txtID_categoria.getText().trim()));
+            categoria.setNombre_categoria(txtNombre_categoria.getText().trim());
+
+            if (categoriaDAO.actualizar(categoria)) {
+                lblMensaje.setText("Categoria actualizada exitosamente.");
+                cargarTabla();
+                limpiarFormulario();
+            } else {
+                mostrarError("No se pudo actualizar la categoría.");
+            }
+        } catch (NumberFormatException e) {
+            mostrarError("El ID debe ser un número válido.");
+        } catch (Exception e) {
+            mostrarError("Error al actualizar: " + e.getMessage());
+        }
     }
 
-    @FXML
+@FXML
     private void handleVolver() {
         try {
-            Main.cambiarVista("/org/key/view/MenuPrincipal.fxml");
+            // Asegúrate de que esta ruta sea exactamente la ruta donde tu compañero guardó el menú principal
+            Main.cambiarVista("/org/key/view/MenuPrincipal.fxml"); 
         } catch (Exception e) {
             mostrarError("Error al volver al menú: " + e.getMessage());
         }
@@ -115,5 +132,29 @@ public class CategoriaController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+
+@FXML
+    private void handleEliminar() {
+        try {
+            if (txtID_categoria.getText().isEmpty()) {
+                mostrarError("Seleccione una categoría de la tabla para eliminar.");
+                return;
+            }
+
+            int id = Integer.parseInt(txtID_categoria.getText().trim());
+
+            if (categoriaDAO.eliminar(id)) {
+                lblMensaje.setText("Categoría eliminada exitosamente.");
+                cargarTabla();
+                limpiarFormulario();
+            } else {
+                mostrarError("No se pudo eliminar la categoría.");
+            }
+        } catch (NumberFormatException e) {
+            mostrarError("El ID no es válido.");
+        } catch (Exception e) {
+            mostrarError("Error al eliminar: " + e.getMessage());
+        }
     }
 }
