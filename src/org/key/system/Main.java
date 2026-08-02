@@ -1,4 +1,5 @@
 
+
 package org.key.system;
 
 import javafx.application.Application;
@@ -16,6 +17,17 @@ public class Main extends Application {
     private static Stage escenarioPrincipal;
 
 
+    @Override
+    public void start(Stage escenarioPrincipal) throws Exception {
+        this.escenarioPrincipal = escenarioPrincipal;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/key/view/MenuPrincipal.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        escenarioPrincipal.setTitle("Key Librería");
+        escenarioPrincipal.setScene(scene);
+        escenarioPrincipal.show();
+    }
+
 
     public static void cambiarVista(String fxmlPath) throws Exception {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlPath));
@@ -28,11 +40,7 @@ public class Main extends Application {
         launch(args);
     }
 
-@Override
-public void start(Stage stage) throws Exception {
-    escenarioPrincipal = stage;
-    cambiarVista("/org/key/view/CategoriaView.fxml"); // Abre directamente la vista de categorías
-    stage.setTitle("Key Librería - Categorías");
-    stage.show();
-}
+
+
+
 }
