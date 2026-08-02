@@ -20,7 +20,6 @@ import org.key.util.Conexion;
  */
 public class AutorDAOImpl implements AutorDAO {
 
-    @Override
     public List<Autor> listarTodos() {
         // crear lista
         List<Autor> autores = new ArrayList<>();
@@ -48,12 +47,10 @@ public class AutorDAOImpl implements AutorDAO {
         return autores;
     }
 
-    @Override
     public boolean crear(Autor autor) {
         return false;
     }
 
-    @Override
     public Autor buscarPorId(int idAutor) {
         Autor autor = new Autor();
 
@@ -83,12 +80,10 @@ public class AutorDAOImpl implements AutorDAO {
         return autor;
     }
 
-    @Override
     public boolean actualizar(Autor autor) {
         return false;
     }
 
-    @Override
     public boolean eliminar(int idAutor) {
         return false;
     }
