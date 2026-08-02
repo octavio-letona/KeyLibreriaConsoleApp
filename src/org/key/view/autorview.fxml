@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.AutorFXController">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.AutorviewController">
     <top>
         <Label text="Módulo de Autores" style="-fx-font-size: 24; -fx-font-weight: bold;" BorderPane.alignment="CENTER">
             <padding><Insets top="20" bottom="20"/></padding>
