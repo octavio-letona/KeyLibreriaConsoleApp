@@ -9,8 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.key.dao.impl.CategoriaDAO;
 import org.key.dao.impl.CategoriaDAOImpl;
 import org.key.model.Categoria;
@@ -34,11 +36,23 @@ public class CategoriaController implements Initializable {
 
     private final CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
     private final ObservableList<Categoria> listaCategorias = FXCollections.observableArrayList();
+    
+    @FXML TableColumn colID;
+    @FXML TableColumn colNombre;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cargarTabla();
         seleccionarFila();
+        configurarTabla();
+    }
+    
+            private void configurarTabla() {
+            //CellValueFactory, PropertyValueFactory
+            //Valor de fabrica de celda
+            colID.setCellValueFactory(new PropertyValueFactory<Categoria, Integer>("Id"));
+            colNombre.setCellValueFactory(new PropertyValueFactory<Categoria, String>("nombre_categoria"));
+ 
     }
 
     private void cargarTabla() {

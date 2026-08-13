@@ -47,7 +47,7 @@ public class MenuPrincipalController {
     private void handleCategorias() {
         try {
             // Verifica que este nombre de archivo coincida con mayúsculas y minúsculas exactas
-            Main.cambiarVista("/org/key/view/EditorialView.fxml");
+            Main.cambiarVista("/org/key/view/CategoriaView.fxml");
         } catch (Exception e) {
             mostrarError("Error al cargar la vista de editoriales:\n" + e.toString());
         }
