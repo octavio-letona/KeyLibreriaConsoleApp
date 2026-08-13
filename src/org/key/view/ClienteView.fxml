@@ -6,25 +6,24 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane stylesheets="@clienteview.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.ClienteFXController">
-    <padding><Insets top="20" right="20" bottom="20" left="20" /></padding>
+<BorderPane stylesheets="@clienteview.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.ClienteFXController">
+    <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
 
     <left>
-        <VBox spacing="10" minWidth="300" maxWidth="300">
+        <VBox maxWidth="300" minWidth="300" spacing="10">
             <padding><Insets right="20" /></padding>
-            <Label text="Registrar Cliente" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+            <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Registrar Cliente" />
             <TextField fx:id="txtCui" promptText="CUI" />
             <TextField fx:id="txtNombre" promptText="Nombre" />
             <TextField fx:id="txtApellido" promptText="Apellido" />
             <TextField fx:id="txtCorreo" promptText="Correo Electrónico" />
             <HBox spacing="10">
-                <Button text="Guardar" onAction="#handleGuardar" prefWidth="120" />
-                <Button text="Limpiar" onAction="#handleLimpiar" prefWidth="120" />
+                <Button onAction="#handleGuardar" prefWidth="120" text="Guardar" />
+                <Button onAction="#handleLimpiar" prefWidth="120" text="Limpiar" />
             </HBox>
             <Label fx:id="lblMensaje" />
         </VBox>
@@ -32,34 +31,21 @@
 
     <center>
         <VBox spacing="10">
-            <Label text="Lista de Clientes" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+            <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Lista de Clientes" />
             <TableView fx:id="tablaClientes">
                 <columns>
-                    <TableColumn text="CUI" prefWidth="120">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="cui" />
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="Nombre" prefWidth="140">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="nombre" />
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="Apellido" prefWidth="140">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="apellido" />
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="Correo Electrónico" prefWidth="200">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="correoElectronico" />
-                        </cellValueFactory>
-                    </TableColumn>
+                    <TableColumn fx:id="colCui" prefWidth="120" text="CUI" />
+                    
+                    <TableColumn fx:id="colNombre" prefWidth="140" text="Nombre" />
+                    
+                    <TableColumn fx:id="colApellido" prefWidth="140" text="Apellido" />
+                    
+                    <TableColumn fx:id="colCorreo" prefWidth="200" text="Correo Electrónico" />
                 </columns>
             </TableView>
             <HBox spacing="10">
-                <Button text="Actualizar Tabla" onAction="#handleActualizar" />
-                <Button text="Volver al Menú" onAction="#handleVolver" />
+                <Button onAction="#handleActualizar" text="Actualizar Tabla" />
+                <Button onAction="#handleVolver" text="Volver al Menú" />
             </HBox>
         </VBox>
     </center>

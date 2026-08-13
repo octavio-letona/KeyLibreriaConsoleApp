@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane stylesheets="@editorialview.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.EditorialFXController">
-    <padding><Insets top="20" right="20" bottom="20" left="20" /></padding>
+<BorderPane stylesheets="@editorialview.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.EditorialFXController">
+    <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
 
     <left>
-        <VBox spacing="10" minWidth="300" maxWidth="300">
+        <VBox maxWidth="300" minWidth="300" spacing="10">
             <padding><Insets right="20" /></padding>
-            <Label text="Registrar Editorial" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+            <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Registrar Editorial" />
             
             <!-- AQUÍ ESTABA EL ERROR: Cambié txtNit por txtNitEditorial -->
             <TextField fx:id="txtNitEditorial" promptText="NIT" />
@@ -26,8 +26,8 @@
             <TextField fx:id="txtTelefonoEditorial" promptText="Telefono Editorial" />
             <TextField fx:id="txtDireccionEditorial" promptText="Direccion Editorial" />
             <HBox spacing="10">
-                <Button text="Guardar" onAction="#handleGuardar" prefWidth="120" />
-                <Button text="Limpiar" onAction="#handleLimpiar" prefWidth="120" />
+                <Button onAction="#handleGuardar" prefWidth="120" text="Guardar" />
+                <Button onAction="#handleLimpiar" prefWidth="120" text="Limpiar" />
             </HBox>
             <Label fx:id="lblMensaje" />
         </VBox>
@@ -35,25 +35,25 @@
 
     <center>
         <VBox spacing="10">
-            <Label text="Lista de Editoriales" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+            <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Lista de Editoriales" />
             <TableView fx:id="tablaEditorial">
                 <columns>
-                    <TableColumn text="NIT" prefWidth="120">
+                    <TableColumn fx:id="colNit" prefWidth="120" text="NIT">
                         <cellValueFactory>
                             <PropertyValueFactory property="nit" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Nombre Editorial" prefWidth="140">
+                    <TableColumn fx:id="colNombre" prefWidth="140" text="Nombre Editorial">
                         <cellValueFactory>
                             <PropertyValueFactory property="nombreEditorial" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Telefono Editorial" prefWidth="140">
+                    <TableColumn fx:id="colTelefono" prefWidth="140" text="Telefono Editorial">
                         <cellValueFactory>
                             <PropertyValueFactory property="telefonoEditorial" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Direccion Editorial" prefWidth="200">
+                    <TableColumn fx:id="colDirecion" prefWidth="200" text="Direccion Editorial">
                         <cellValueFactory>
                             <PropertyValueFactory property="direccionEditorial" />
                         </cellValueFactory>
@@ -61,8 +61,8 @@
                 </columns>
             </TableView>
             <HBox spacing="10">
-                <Button text="Actualizar Tabla" onAction="#handleActualizar" />
-                <Button text="Volver al Menú" onAction="#handleVolver" />
+                <Button onAction="#handleActualizar" text="Actualizar Tabla" />
+                <Button onAction="#handleVolver" text="Volver al Menú" />
             </HBox>
         </VBox>
     </center>
