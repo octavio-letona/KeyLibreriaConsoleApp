@@ -67,8 +67,8 @@ public class EditorialFXController implements Initializable {
 
         colNit.setCellValueFactory(new PropertyValueFactory<Editorial, Long>("nit"));
         colNombre.setCellValueFactory(new PropertyValueFactory<Editorial, String>("nombreEditorial"));
-        colTelefono.setCellValueFactory(new PropertyValueFactory<Editorial, String>("apellido"));
-        colDirecion.setCellValueFactory(new PropertyValueFactory<Editorial, String>("correoElectronico"));
+        colTelefono.setCellValueFactory(new PropertyValueFactory<Editorial, String>("telefonoEditorial"));
+        colDirecion.setCellValueFactory(new PropertyValueFactory<Editorial, String>("direccionEditorial"));
 
     }
 
