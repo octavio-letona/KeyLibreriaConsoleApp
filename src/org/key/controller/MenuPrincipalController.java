@@ -1,17 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package org.key.controller;
-
+ 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import org.key.system.Main;
-
+ 
 //falta el extends initilize
 public class MenuPrincipalController {
-
+ 
     @FXML
     private void handleClientes() {
         try {
@@ -19,9 +15,8 @@ public class MenuPrincipalController {
         } catch (Exception e) {
             mostrarError("Error al cargar la vista de clientes:\n" + e.getMessage());
         }
-        
     }
-
+ 
     @FXML
     private void handleEditorial() {
         try {
@@ -31,7 +26,6 @@ public class MenuPrincipalController {
             mostrarError("Error al cargar la vista de editoria:\n" + e.toString());
         }
     }
-    
     @FXML
     private void handleAutores() {
         try {
@@ -41,8 +35,7 @@ public class MenuPrincipalController {
             mostrarError("Error al cargar la vista de Aurotes:\n" + e.toString());
         }
     }
-    
-    
+
         @FXML
     private void handleCategorias() {
         try {
@@ -52,7 +45,7 @@ public class MenuPrincipalController {
             mostrarError("Error al cargar la vista de Categorias:\n" + e.toString());
         }
     }
-
+ 
     @FXML
     private void handleNoDisponible() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -61,12 +54,12 @@ public class MenuPrincipalController {
         alert.setContentText("Este módulo no está disponible aún.");
         alert.showAndWait();
     }
-
+ 
     @FXML
     private void handleSalir() {
         Platform.exit();
     }
-
+ 
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -74,5 +67,5 @@ public class MenuPrincipalController {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-
+ 
 }

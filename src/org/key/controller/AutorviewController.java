@@ -12,8 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.key.dao.impl.AutorDAO;
 import org.key.dao.impl.AutorDAOImpl;
 import org.key.model.Autor;
@@ -36,6 +38,17 @@ public class AutorviewController implements Initializable {
     @FXML
     private TableView<Autor> tablaAutores; //Tabla de entidad: autor
 
+    @FXML
+    TableColumn coIIdAutor;
+    @FXML
+    TableColumn colNombre;
+    @FXML
+    TableColumn colApellido;
+    @FXML
+    TableColumn colNacionalidad;
+    @FXML
+    TableColumn colBiografia;
+
     private final AutorDAO autorDAO = new AutorDAOImpl();
     private final ObservableList<Autor> listaAutores = FXCollections.observableArrayList(); //Entidad:Autor
 
@@ -43,6 +56,19 @@ public class AutorviewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cargarTabla();
         seleccionarFila();
+        configurarTabla();
+    }
+
+    private void configurarTabla() {
+        //CellValueFactory, PropertyValueFactory
+        //Valor de fabrica de celda
+        
+        coIIdAutor.setCellValueFactory(new PropertyValueFactory<Autor, Integer>("idAutor"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<Autor, String>("nombreAutor"));
+        colApellido.setCellValueFactory(new PropertyValueFactory<Autor, String>("apellidoAutor"));
+        colNacionalidad.setCellValueFactory(new PropertyValueFactory<Autor, String>("nacionalidad"));
+        colBiografia.setCellValueFactory(new PropertyValueFactory<Autor, String>("biografia"));
+
     }
 
     private void cargarTabla() {
@@ -74,12 +100,12 @@ public class AutorviewController implements Initializable {
             }
 
             Autor autor = new Autor();
-            
+
             // Si el campo de ID tiene texto (ej. para una actualización futura), lo parseamos
             if (!txtIdAutor.getText().trim().isEmpty()) {
                 autor.setIdAutor(Integer.parseInt(txtIdAutor.getText().trim()));
             }
-            
+
             autor.setNombreAutor(txtNombreAutor.getText().trim());
             autor.setApellidoAutor(txtApellidoAutor.getText().trim());
             autor.setNacionalidad(txtNacionalidad.getText().trim());
