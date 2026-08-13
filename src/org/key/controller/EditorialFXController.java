@@ -12,8 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.key.dao.impl.EditorialDAO;
 import org.key.dao.impl.EditorialDAOImpl;
 import org.key.model.Editorial;
@@ -34,20 +36,43 @@ public class EditorialFXController implements Initializable {
     @FXML
     private TableView<Editorial> tablaEditorial;
 
+      @FXML
+    TableColumn colNit;
+    @FXML
+    TableColumn colNombre;
+    @FXML
+    TableColumn colTelefono;
+    @FXML
+    TableColumn colDirecion;
+    
+    
     private final EditorialDAO editorialDAO = new EditorialDAOImpl();
     private final ObservableList<Editorial> listaEditoriales = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        configurarTabla();
         cargarTabla();
         seleccionarFila();
+
     }
+    
 
     private void cargarTabla() {
         listaEditoriales.setAll(editorialDAO.listarTodos());
         tablaEditorial.setItems(listaEditoriales);
     }
 
+     private void configurarTabla() {
+
+        colNit.setCellValueFactory(new PropertyValueFactory<Editorial, Long>("nit"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<Editorial, String>("nombreEditorial"));
+        colTelefono.setCellValueFactory(new PropertyValueFactory<Editorial, String>("apellido"));
+        colDirecion.setCellValueFactory(new PropertyValueFactory<Editorial, String>("correoElectronico"));
+
+    }
+
+    
     private void seleccionarFila() {
         tablaEditorial.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> {
