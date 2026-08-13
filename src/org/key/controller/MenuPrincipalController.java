@@ -28,7 +28,7 @@ public class MenuPrincipalController {
             // Verifica que este nombre de archivo coincida con mayúsculas y minúsculas exactas
             Main.cambiarVista("/org/key/view/EditorialView.fxml");
         } catch (Exception e) {
-            mostrarError("Error al cargar la vista de editoriales:\n" + e.toString());
+            mostrarError("Error al cargar la vista de editoria:\n" + e.toString());
         }
     }
     
@@ -36,9 +36,9 @@ public class MenuPrincipalController {
     private void handleAutores() {
         try {
             // Verifica que este nombre de archivo coincida con mayúsculas y minúsculas exactas
-            Main.cambiarVista("/org/key/view/CategoriaView.fxml");
+            Main.cambiarVista("/org/key/view/autorview.fxml");
         } catch (Exception e) {
-            mostrarError("Error al cargar la vista de editoriales:\n" + e.toString());
+            mostrarError("Error al cargar la vista de Aurotes:\n" + e.toString());
         }
     }
     
@@ -49,7 +49,7 @@ public class MenuPrincipalController {
             // Verifica que este nombre de archivo coincida con mayúsculas y minúsculas exactas
             Main.cambiarVista("/org/key/view/CategoriaView.fxml");
         } catch (Exception e) {
-            mostrarError("Error al cargar la vista de editoriales:\n" + e.toString());
+            mostrarError("Error al cargar la vista de Categorias:\n" + e.toString());
         }
     }
 
