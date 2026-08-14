@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="mainPane" prefHeight="550.0" prefWidth="850.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21.0.1" fx:controller="org.octavioletona.controller.InicioSesionController">
-    <stylesheets>
-        <URL value="@/org/octavioletona/view/style/iniciosesionview.css" />
-    </stylesheets>
+<AnchorPane id="mainPane" prefHeight="550.0" prefWidth="850.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21.0.1" fx:controller="org.key.controller.InicioSesionController">
+<stylesheets>
+    <URL value="@iniciosesionview.css" />
+</stylesheets>
     <children>
         <VBox id="loginCard" alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="80.0">
             <Label id="titleLabel" text="Iniciar Sesión" />
