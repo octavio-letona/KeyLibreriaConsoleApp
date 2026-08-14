@@ -14,8 +14,10 @@
     <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
 
     <left>
-        <VBox maxWidth="300" minWidth="300" spacing="10">
+        <VBox maxWidth="300" minWidth="300" prefHeight="670.0" prefWidth="300.0" spacing="10">
             <padding><Insets right="20" /></padding>
+            <TextField fx:id="txtBuscar" promptText="Buscar Categoria" />
+            <Button mnemonicParsing="false" onAction="#handleBuscar" prefHeight="4.0" prefWidth="80.0" text="Buscar" />
             <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Gestión de Categorías" />
             <TextField fx:id="txtID_categoria" editable="false" promptText="ID (Autogenerado)" />
             <TextField fx:id="txtNombre_categoria" promptText="Nombre de Categoría" />
@@ -34,10 +36,10 @@
     <center>
         <VBox spacing="10">
             <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Lista de Categorías" />
-            <TableView fx:id="tablaCategoria">
+            <!-- Se agregó la etiqueta TableView que faltaba -->
+            <TableView fx:id="tblCategorias" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colID" prefWidth="100" text="ID" />
-
                     <TableColumn fx:id="colNombre" prefWidth="300" text="Nombre de Categoría" />
                 </columns>
             </TableView>

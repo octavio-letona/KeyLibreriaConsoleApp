@@ -1,10 +1,11 @@
-
 package org.key.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -18,50 +19,54 @@ import org.key.dao.impl.CategoriaDAOImpl;
 import org.key.model.Categoria;
 import org.key.system.Main;
 
-/**
- *
- * @author informatica
- */
 public class CategoriaController implements Initializable {
 
     @FXML
     private TextField txtID_categoria;
+
     @FXML
     private TextField txtNombre_categoria;
 
     @FXML
-    private Label lblMensaje;
+    private TextField txtBuscar;
+
     @FXML
-    private TableView<Categoria> tablaCategoria; // Tabla de entidad: categoria
+    private Label lblMensaje;
+
+    @FXML
+    private TableView<Categoria> tblCategorias;
+
+    @FXML
+    private TableColumn<Categoria, Integer> colID;
+
+    @FXML
+    private TableColumn<Categoria, String> colNombre;
 
     private final CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
+
     private final ObservableList<Categoria> listaCategorias = FXCollections.observableArrayList();
-    
-    @FXML TableColumn colID;
-    @FXML TableColumn colNombre;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        configurarTabla();
         cargarTabla();
         seleccionarFila();
-        configurarTabla();
     }
-    
-            private void configurarTabla() {
-            //CellValueFactory, PropertyValueFactory
-            //Valor de fabrica de celda
-            colID.setCellValueFactory(new PropertyValueFactory<Categoria, Integer>("Id"));
-            colNombre.setCellValueFactory(new PropertyValueFactory<Categoria, String>("nombre_categoria"));
- 
+
+    private void configurarTabla() {
+        colID.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre_categoria"));
     }
 
     private void cargarTabla() {
         listaCategorias.setAll(categoriaDAO.listarTodos());
-        tablaCategoria.setItems(listaCategorias);
+        SortedList<Categoria> datosOrdenados = new SortedList<>(listaCategorias);
+        datosOrdenados.comparatorProperty().bind(tblCategorias.comparatorProperty());
+        tblCategorias.setItems(datosOrdenados);
     }
 
     private void seleccionarFila() {
-        tablaCategoria.getSelectionModel().selectedItemProperty().addListener(
+        tblCategorias.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> {
                     if (newSelection != null) {
                         txtID_categoria.setText(String.valueOf(newSelection.getId()));
@@ -82,11 +87,11 @@ public class CategoriaController implements Initializable {
             categoria.setNombre_categoria(txtNombre_categoria.getText().trim());
 
             if (categoriaDAO.crear(categoria)) {
-                lblMensaje.setText("Categoria registrada exitosamente.");
+                lblMensaje.setText("Categoría registrada exitosamente.");
                 cargarTabla();
                 limpiarFormulario();
             } else {
-                mostrarError("No se pudo registrar la categoria.");
+                mostrarError("No se pudo registrar la categoría.");
             }
         } catch (Exception e) {
             mostrarError("Error al guardar: " + e.getMessage());
@@ -97,6 +102,7 @@ public class CategoriaController implements Initializable {
     private void handleLimpiar() {
         limpiarFormulario();
         lblMensaje.setText("");
+        txtBuscar.clear();
     }
 
     @FXML
@@ -112,7 +118,7 @@ public class CategoriaController implements Initializable {
             categoria.setNombre_categoria(txtNombre_categoria.getText().trim());
 
             if (categoriaDAO.actualizar(categoria)) {
-                lblMensaje.setText("Categoria actualizada exitosamente.");
+                lblMensaje.setText("Categoría actualizada exitosamente.");
                 cargarTabla();
                 limpiarFormulario();
             } else {
@@ -125,30 +131,7 @@ public class CategoriaController implements Initializable {
         }
     }
 
-@FXML
-    private void handleVolver() {
-        try {
-            // Asegúrate de que esta ruta sea exactamente la ruta donde tu compañero guardó el menú principal
-            Main.cambiarVista("/org/key/view/MenuPrincipal.fxml"); 
-        } catch (Exception e) {
-            mostrarError("Error al volver al menú: " + e.getMessage());
-        }
-    }
-
-    private void limpiarFormulario() {
-        txtID_categoria.clear();
-        txtNombre_categoria.clear();
-    }
-
-    private void mostrarError(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
-
-@FXML
+    @FXML
     private void handleEliminar() {
         try {
             if (txtID_categoria.getText().isEmpty()) {
@@ -170,5 +153,33 @@ public class CategoriaController implements Initializable {
         } catch (Exception e) {
             mostrarError("Error al eliminar: " + e.getMessage());
         }
+    }
+
+    @FXML
+    private void handleVolver() {
+        try {
+            Main.cambiarVista("/org/key/view/MenuPrincipal.fxml");
+        } catch (Exception e) {
+            mostrarError("Error al volver al menú: " + e.getMessage());
+        }
+    }
+
+    private void limpiarFormulario() {
+        txtID_categoria.clear();
+        txtNombre_categoria.clear();
+        tblCategorias.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    private void handleBuscar() {
+        mostrarError("Ocurrió un error: opción en progreso.");
+    }
+
+    private void mostrarError(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }
