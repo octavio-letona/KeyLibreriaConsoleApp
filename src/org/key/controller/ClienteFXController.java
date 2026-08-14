@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.key.controller;
 
 import java.net.URL;
@@ -24,6 +20,8 @@ import org.key.system.Main;
 public class ClienteFXController implements Initializable {
 
     @FXML
+    private TextField txtBuscar; // Campo de búsqueda superior
+    @FXML
     private TextField txtCui;
     @FXML
     private TextField txtNombre;
@@ -34,35 +32,32 @@ public class ClienteFXController implements Initializable {
     @FXML
     private Label lblMensaje;
     @FXML
-    private TableView<Cliente> tablaClientes;//Tabla de entidad: cliente
+    private TableView<Cliente> tablaClientes; // Tabla de entidad: cliente
 
     @FXML
-    TableColumn colCui;
+    private TableColumn colCui;
     @FXML
-    TableColumn colNombre;
+    private TableColumn colNombre;
     @FXML
-    TableColumn colApellido;
+    private TableColumn colApellido;
     @FXML
-    TableColumn colCorreo;
+    private TableColumn colCorreo;
 
     private final ClienteDAO clienteDAO = new ClienteDAOImpl();
-    private final ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();//Entidad:Cliente
+    private final ObservableList<Cliente> listaClientes = FXCollections.observableArrayList(); // Entidad: Cliente
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         configurarTabla();
         cargarTabla();
         seleccionarFila();
-
     }
-    
-        private void configurarTabla() {
 
+    private void configurarTabla() {
         colCui.setCellValueFactory(new PropertyValueFactory<Cliente, Long>("cui"));
         colNombre.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nombre"));
         colApellido.setCellValueFactory(new PropertyValueFactory<Cliente, String>("apellido"));
         colCorreo.setCellValueFactory(new PropertyValueFactory<Cliente, String>("correoElectronico"));
-
     }
 
     private void cargarTabla() {
@@ -80,6 +75,16 @@ public class ClienteFXController implements Initializable {
                         txtCorreo.setText(newSelection.getCorreoElectronico());
                     }
                 });
+    }
+
+    // Alerta para la barra de búsqueda aún no implementada
+    @FXML
+    private void handleBuscar() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Función no disponible");
+        alert.setHeaderText(null);
+        alert.setContentText("La función de búsqueda todavía no está agregada.");
+        alert.showAndWait();
     }
 
     @FXML
@@ -146,7 +151,4 @@ public class ClienteFXController implements Initializable {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-
-
-
 }
