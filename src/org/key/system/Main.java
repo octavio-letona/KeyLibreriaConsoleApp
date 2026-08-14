@@ -9,38 +9,41 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
- *
+ * Clase principal unificada
+ * @author Octavio Letona
  */
 public class Main extends Application {
 
+    // Se mantiene estático para poder cambiar las escenas desde cualquier controlador
     private static Stage escenarioPrincipal;
-
-
-    @Override
-    public void start(Stage escenarioPrincipal) throws Exception {
-        this.escenarioPrincipal = escenarioPrincipal;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/key/view/MenuPrincipal.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        escenarioPrincipal.setTitle("Key Librería");
-        escenarioPrincipal.setScene(scene);
-        escenarioPrincipal.show();
-    }
-
-
-    public static void cambiarVista(String fxmlPath) throws Exception {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlPath));
-        Parent root = loader.load();
-        escenarioPrincipal.setScene(new Scene(root));
-
-    }
 
     public static void main(String[] args) {
         launch(args);
     }
 
+    @Override
+    public void start(Stage escenarioPrincipal) throws Exception {
+        Main.escenarioPrincipal = escenarioPrincipal;
+        
+        // 1. Iniciamos la aplicación cargando la vista de Inicio de Sesión
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/octavioletona/view/InicioSesionView.fxml"));
+        Parent raiz = loader.load();
+        Scene escena = new Scene(raiz);
+        
+        escenarioPrincipal.setTitle("Inicio de Sesión");
+        escenarioPrincipal.setScene(escena);
+        escenarioPrincipal.show();
+    }
 
-
-
+    /**
+     * Método global para cambiar de pantallas (ej. pasar del Login al Menú)
+     * @param fxmlPath Ruta absoluta del archivo FXML
+     */
+    public static void cambiarVista(String fxmlPath) throws Exception {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlPath));
+        Parent root = loader.load();
+        
+        escenarioPrincipal.setScene(new Scene(root));
+        escenarioPrincipal.centerOnScreen(); // Opcional: centra la ventana al cambiar de vista
+    }
 }
