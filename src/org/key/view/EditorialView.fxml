@@ -14,6 +14,16 @@
 <BorderPane stylesheets="@editorialview.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.EditorialFXController">
     <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
 
+    <!-- NUEVA SECCIÓN: Barra de búsqueda superior -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding><Insets bottom="20" /></padding>
+            <Label style="-fx-font-size: 14; -fx-font-weight: bold;" text="Buscar Editorial:" />
+            <TextField fx:id="txtBuscar" promptText="Ingrese búsqueda..." prefWidth="250" />
+            <Button onAction="#handleBuscar" text="Buscar" />
+        </HBox>
+    </top>
+
     <left>
         <VBox maxWidth="300" minWidth="300" spacing="10">
             <padding><Insets right="20" /></padding>
@@ -36,7 +46,7 @@
     <center>
         <VBox spacing="10">
             <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Lista de Editoriales" />
-            <TableView fx:id="tablaEditorial">
+            <TableView fx:id="tablaEditorial" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colNit" prefWidth="120" text="NIT">
                         <cellValueFactory>

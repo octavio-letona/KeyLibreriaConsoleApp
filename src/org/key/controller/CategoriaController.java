@@ -66,37 +66,7 @@ public class CategoriaController implements Initializable {
         listaCategorias.setAll(categoriaDAO.listarTodos());
     }
 
-    private void configurarBuscador() {
-        // Envolver la lista principal en un FilteredList
-        categoriasFiltradas = new FilteredList<>(listaCategorias, p -> true);
-
-        // Listener para filtrar dinámicamente mientras el usuario escribe
-        if (txtBuscar != null) {
-            txtBuscar.textProperty().addListener((observable, oldValue, newValue) -> {
-                categoriasFiltradas.setPredicate(categoria -> {
-                    if (newValue == null || newValue.trim().isEmpty()) {
-                        return true;
-                    }
-
-                    String filterLower = newValue.toLowerCase().trim();
-
-                    if (categoria.getNombre_categoria() != null && 
-                        categoria.getNombre_categoria().toLowerCase().contains(filterLower)) {
-                        return true;
-                    } else if (String.valueOf(categoria.getId()).contains(filterLower)) {
-                        return true;
-                    }
-
-                    return false;
-                });
-            });
-
-            // Envolver el FilteredList en un SortedList para mantener el ordenamiento de la tabla
-            SortedList<Categoria> sortedData = new SortedList<>(categoriasFiltradas);
-            sortedData.comparatorProperty().bind(tablaCategoria.comparatorProperty());
-            tablaCategoria.setItems(sortedData);
-        }
-    }
+    
 
     private void seleccionarFila() {
         tablaCategoria.getSelectionModel().selectedItemProperty().addListener(

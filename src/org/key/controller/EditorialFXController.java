@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.key.controller;
 
 import java.net.URL;
@@ -24,6 +20,8 @@ import org.key.system.Main;
 public class EditorialFXController implements Initializable {
 
     @FXML
+    private TextField txtBuscar; // Nuevo TextField para la barra de búsqueda
+    @FXML
     private TextField txtNitEditorial;
     @FXML
     private TextField txtNombreEditorial;
@@ -36,7 +34,7 @@ public class EditorialFXController implements Initializable {
     @FXML
     private TableView<Editorial> tablaEditorial;
 
-      @FXML
+    @FXML
     TableColumn colNit;
     @FXML
     TableColumn colNombre;
@@ -44,7 +42,6 @@ public class EditorialFXController implements Initializable {
     TableColumn colTelefono;
     @FXML
     TableColumn colDirecion;
-    
     
     private final EditorialDAO editorialDAO = new EditorialDAOImpl();
     private final ObservableList<Editorial> listaEditoriales = FXCollections.observableArrayList();
@@ -54,24 +51,19 @@ public class EditorialFXController implements Initializable {
         configurarTabla();
         cargarTabla();
         seleccionarFila();
-
     }
     
-
     private void cargarTabla() {
         listaEditoriales.setAll(editorialDAO.listarTodos());
         tablaEditorial.setItems(listaEditoriales);
     }
 
-     private void configurarTabla() {
-
+    private void configurarTabla() {
         colNit.setCellValueFactory(new PropertyValueFactory<Editorial, Long>("nit"));
         colNombre.setCellValueFactory(new PropertyValueFactory<Editorial, String>("nombreEditorial"));
         colTelefono.setCellValueFactory(new PropertyValueFactory<Editorial, String>("telefonoEditorial"));
         colDirecion.setCellValueFactory(new PropertyValueFactory<Editorial, String>("direccionEditorial"));
-
     }
-
     
     private void seleccionarFila() {
         tablaEditorial.getSelectionModel().selectedItemProperty().addListener(
@@ -85,6 +77,13 @@ public class EditorialFXController implements Initializable {
                 }
         );
     }
+
+    // --- NUEVO MÉTODO DE BÚSQUEDA ---
+    @FXML
+    private void handleBuscar() {
+        mostrarError("La vista no está programada aún");
+    }
+    // --------------------------------
 
     @FXML
     private void handleGuardar() {
@@ -141,6 +140,9 @@ public class EditorialFXController implements Initializable {
         txtNombreEditorial.clear();
         txtDireccionEditorial.clear();
         txtTelefonoEditorial.clear();
+        if (txtBuscar != null) {
+            txtBuscar.clear();
+        }
     }
 
     private void mostrarError(String mensaje) {
