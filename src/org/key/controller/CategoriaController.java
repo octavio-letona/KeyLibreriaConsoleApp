@@ -1,4 +1,3 @@
-
 package org.key.controller;
 
 import java.net.URL;
@@ -35,221 +34,188 @@ public class CategoriaController implements Initializable {
     private Label lblMensaje;
 
     @FXML
-    private TableView<Categoria> tablaCategoria;
+     TableView<Categoria> tablaCategoria;
 
     @FXML
-    TableColumn colID;
+    private TableColumn<Categoria, Integer> colID;
 
     @FXML
-    TableColumn colNombre;
+    private TableColumn<Categoria, String> colNombre;
 
     private final CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
-
     private final ObservableList<Categoria> listaCategorias = FXCollections.observableArrayList();
-
     private FilteredList<Categoria> categoriasFiltradas;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        configurarTabla();
         cargarTabla();
         seleccionarFila();
-        configurarTabla();
+        configurarBuscador();
     }
 
     private void configurarTabla() {
-
-        colID.setCellValueFactory(
-                new PropertyValueFactory<Categoria, Integer>("Id"));
-
-        colNombre.setCellValueFactory(
-                new PropertyValueFactory<Categoria, String>("nombre_categoria"));
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre_categoria"));
+        
+        // CORRECCIÓN CLAVE: Vincular la lista Observable al TableView
+        tablaCategoria.setItems(listaCategorias);
     }
 
     private void cargarTabla() {
         listaCategorias.setAll(categoriaDAO.listarTodos());
     }
 
-    private void seleccionarFila() {
+    private void configurarBuscador() {
+        // Envolver la lista principal en un FilteredList
+        categoriasFiltradas = new FilteredList<>(listaCategorias, p -> true);
 
+        // Listener para filtrar dinámicamente mientras el usuario escribe
+        if (txtBuscar != null) {
+            txtBuscar.textProperty().addListener((observable, oldValue, newValue) -> {
+                categoriasFiltradas.setPredicate(categoria -> {
+                    if (newValue == null || newValue.trim().isEmpty()) {
+                        return true;
+                    }
+
+                    String filterLower = newValue.toLowerCase().trim();
+
+                    if (categoria.getNombre_categoria() != null && 
+                        categoria.getNombre_categoria().toLowerCase().contains(filterLower)) {
+                        return true;
+                    } else if (String.valueOf(categoria.getId()).contains(filterLower)) {
+                        return true;
+                    }
+
+                    return false;
+                });
+            });
+
+            // Envolver el FilteredList en un SortedList para mantener el ordenamiento de la tabla
+            SortedList<Categoria> sortedData = new SortedList<>(categoriasFiltradas);
+            sortedData.comparatorProperty().bind(tablaCategoria.comparatorProperty());
+            tablaCategoria.setItems(sortedData);
+        }
+    }
+
+    private void seleccionarFila() {
         tablaCategoria.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> {
-
                     if (newSelection != null) {
-
-                        txtID_categoria.setText(
-                                String.valueOf(newSelection.getId()));
-
-                        txtNombre_categoria.setText(
-                                newSelection.getNombre_categoria());
+                        txtID_categoria.setText(String.valueOf(newSelection.getId()));
+                        txtNombre_categoria.setText(newSelection.getNombre_categoria());
                     }
                 });
     }
 
     @FXML
     private void handleGuardar() {
-
         try {
-
-            if (txtNombre_categoria.getText().isEmpty()) {
+            if (txtNombre_categoria.getText().trim().isEmpty()) {
                 mostrarError("El nombre de la categoría es obligatorio.");
                 return;
             }
 
             Categoria categoria = new Categoria();
-
-            categoria.setNombre_categoria(
-                    txtNombre_categoria.getText().trim());
+            categoria.setNombre_categoria(txtNombre_categoria.getText().trim());
 
             if (categoriaDAO.crear(categoria)) {
-
-                lblMensaje.setText(
-                        "Categoria registrada exitosamente.");
-
+                lblMensaje.setText("Categoría registrada exitosamente.");
                 cargarTabla();
                 limpiarFormulario();
-
             } else {
-
-                mostrarError(
-                        "No se pudo registrar la categoria.");
+                mostrarError("No se pudo registrar la categoría.");
             }
-
         } catch (Exception e) {
-
-            mostrarError(
-                    "Error al guardar: " + e.getMessage());
+            mostrarError("Error al guardar: " + e.getMessage());
         }
     }
 
     @FXML
     private void handleLimpiar() {
-
         limpiarFormulario();
         lblMensaje.setText("");
     }
 
     @FXML
     private void handleActualizar() {
-
         try {
-
-            if (txtID_categoria.getText().isEmpty()
-                    || txtNombre_categoria.getText().isEmpty()) {
-
-                mostrarError(
-                        "Seleccione una categoría para actualizar.");
-
+            if (txtID_categoria.getText().isEmpty() || txtNombre_categoria.getText().trim().isEmpty()) {
+                mostrarError("Seleccione una categoría para actualizar.");
                 return;
             }
 
             Categoria categoria = new Categoria();
-
-            categoria.setId(
-                    Integer.parseInt(
-                            txtID_categoria.getText().trim()));
-
-            categoria.setNombre_categoria(
-                    txtNombre_categoria.getText().trim());
+            categoria.setId(Integer.parseInt(txtID_categoria.getText().trim()));
+            categoria.setNombre_categoria(txtNombre_categoria.getText().trim());
 
             if (categoriaDAO.actualizar(categoria)) {
-
-                lblMensaje.setText(
-                        "Categoria actualizada exitosamente.");
-
+                lblMensaje.setText("Categoría actualizada exitosamente.");
                 cargarTabla();
                 limpiarFormulario();
-
             } else {
-
-                mostrarError(
-                        "No se pudo actualizar la categoría.");
+                mostrarError("No se pudo actualizar la categoría.");
             }
-
         } catch (NumberFormatException e) {
-
-            mostrarError(
-                    "El ID debe ser un número válido.");
-
+            mostrarError("El ID debe ser un número válido.");
         } catch (Exception e) {
-
-            mostrarError(
-                    "Error al actualizar: " + e.getMessage());
+            mostrarError("Error al actualizar: " + e.getMessage());
         }
     }
 
     @FXML
     private void handleEliminar() {
-
         try {
-
             if (txtID_categoria.getText().isEmpty()) {
-
-                mostrarError(
-                        "Seleccione una categoría de la tabla para eliminar.");
-
+                mostrarError("Seleccione una categoría de la tabla para eliminar.");
                 return;
             }
 
-            int id = Integer.parseInt(
-                    txtID_categoria.getText().trim());
+            int id = Integer.parseInt(txtID_categoria.getText().trim());
 
             if (categoriaDAO.eliminar(id)) {
-
-                lblMensaje.setText(
-                        "Categoría eliminada exitosamente.");
-
+                lblMensaje.setText("Categoría eliminada exitosamente.");
                 cargarTabla();
                 limpiarFormulario();
-
             } else {
-
-                mostrarError(
-                        "No se pudo eliminar la categoría.");
+                mostrarError("No se pudo eliminar la categoría.");
             }
-
         } catch (NumberFormatException e) {
-
-            mostrarError(
-                    "El ID no es válido.");
-
+            mostrarError("El ID no es válido.");
         } catch (Exception e) {
+            mostrarError("Error al eliminar: " + e.getMessage());
+        }
+    }
 
-            mostrarError(
-                    "Error al eliminar: " + e.getMessage());
+    @FXML
+    private void handleBuscar() {
+        // La búsqueda ya se realiza automáticamente al escribir en txtBuscar gracias a configurarBuscador().
+        // Este botón se puede usar para forzar el filtro si es necesario.
+        if (txtBuscar != null && txtBuscar.getText() != null) {
+            lblMensaje.setText("Resultados filtrados para: " + txtBuscar.getText());
         }
     }
 
     @FXML
     private void handleVolver() {
-
         try {
-
-            Main.cambiarVista(
-                    "/org/key/view/MenuPrincipal.fxml");
-
+            Main.cambiarVista("/org/key/view/MenuPrincipal.fxml");
         } catch (Exception e) {
-
-            mostrarError(
-                    "Error al volver al menú: " + e.getMessage());
+            mostrarError("Error al volver al menú: " + e.getMessage());
         }
     }
 
     private void limpiarFormulario() {
-
         txtID_categoria.clear();
         txtNombre_categoria.clear();
-    }
-    
-        @FXML
-    private void handleBuscar() {
-        mostrarError("Ocurrió un error al realizar la búsqueda.");
+        if (txtBuscar != null) {
+            txtBuscar.clear();
+        }
+        tablaCategoria.getSelectionModel().clearSelection();
     }
 
     private void mostrarError(String mensaje) {
-
-        Alert alert =
-                new Alert(Alert.AlertType.ERROR);
-
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);

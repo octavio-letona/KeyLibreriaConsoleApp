@@ -20,6 +20,7 @@ public class Main extends Application {
         launch(args);
     }
 
+    
     @Override
     public void start(Stage escenarioPrincipal) throws Exception {
         Main.escenarioPrincipal = escenarioPrincipal;
@@ -45,5 +46,14 @@ public class Main extends Application {
 
         escenarioPrincipal.setScene(new Scene(root));
         escenarioPrincipal.centerOnScreen(); // Opcional: centra la ventana al cambiar de vista
+   
+    
+    
     }
+    
+    
+    public static Stage getEscenarioPrincipal() {
+    return escenarioPrincipal;
+}
+    
 }

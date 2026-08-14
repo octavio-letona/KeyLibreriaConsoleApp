@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane id="mainPane" prefHeight="650.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21.0.1" fx:controller="org.octavioletona.controller.CajeroDashboardController">
+<BorderPane id="mainPane" prefHeight="650.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21.0.1" fx:controller="org.admin.controller.CajeroDashboardController">
     <stylesheets>
         <URL value="@/org/octavioletona/view/style/cajerodashboardview.css" />
     </stylesheets>
