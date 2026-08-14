@@ -36,6 +36,8 @@ public class AutorviewController implements Initializable {
     @FXML
     private Label lblMensaje;
     @FXML
+    private TextField txtBuscar;
+    @FXML
     private TableView<Autor> tablaAutores; //Tabla de entidad: autor
 
     @FXML
@@ -135,6 +137,11 @@ public class AutorviewController implements Initializable {
     private void handleActualizar() {
         cargarTabla();
         lblMensaje.setText("Tabla actualizada.");
+    }
+
+    @FXML
+    private void handleBuscar() {
+        mostrarError("Ocurrió un error al realizar la búsqueda.");
     }
 
     @FXML

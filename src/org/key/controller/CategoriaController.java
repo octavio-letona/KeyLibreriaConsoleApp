@@ -16,12 +16,10 @@ import org.key.dao.impl.CategoriaDAOImpl;
 import org.key.model.Categoria;
 import org.key.system.Main;
 
-/**
- *
- * @author informatica
- */
+
 public class CategoriaController implements Initializable {
 
+    
     @FXML
     private TextField txtID_categoria;
     @FXML
