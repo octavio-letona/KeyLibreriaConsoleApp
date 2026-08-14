@@ -13,12 +13,12 @@
 <BorderPane stylesheets="@clienteview.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.ClienteFXController">
     <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
 
-    <!-- Barra de Búsqueda Superior -->
+    <!-- NUEVA SECCIÓN: Barra de búsqueda superior -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="10">
-            <padding><Insets bottom="15" /></padding>
-            <Label style="-fx-font-weight: bold; -fx-font-size: 14;" text="Buscar:" />
-            <TextField fx:id="txtBuscar" onMouseClicked="#handleBuscar" prefWidth="350" promptText="Buscar cliente por CUI o Nombre..." />
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding><Insets bottom="20" /></padding>
+            <Label style="-fx-font-size: 14; -fx-font-weight: bold;" text="Buscar Cliente:" />
+            <TextField fx:id="txtBuscar" promptText="Ingrese búsqueda..." prefWidth="250" />
             <Button onAction="#handleBuscar" text="Buscar" />
         </HBox>
     </top>
@@ -42,7 +42,7 @@
     <center>
         <VBox spacing="10">
             <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Lista de Clientes" />
-            <TableView fx:id="tablaClientes">
+            <TableView fx:id="tablaClientes" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colCui" prefWidth="120" text="CUI" />
                     <TableColumn fx:id="colNombre" prefWidth="140" text="Nombre" />
