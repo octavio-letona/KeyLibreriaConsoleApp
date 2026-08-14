@@ -13,6 +13,16 @@
 <BorderPane stylesheets="@clienteview.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.key.controller.ClienteFXController">
     <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
 
+    <!-- Barra de Búsqueda Superior -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <padding><Insets bottom="15" /></padding>
+            <Label style="-fx-font-weight: bold; -fx-font-size: 14;" text="Buscar:" />
+            <TextField fx:id="txtBuscar" onMouseClicked="#handleBuscar" prefWidth="350" promptText="Buscar cliente por CUI o Nombre..." />
+            <Button onAction="#handleBuscar" text="Buscar" />
+        </HBox>
+    </top>
+
     <left>
         <VBox maxWidth="300" minWidth="300" spacing="10">
             <padding><Insets right="20" /></padding>
@@ -35,11 +45,8 @@
             <TableView fx:id="tablaClientes">
                 <columns>
                     <TableColumn fx:id="colCui" prefWidth="120" text="CUI" />
-                    
                     <TableColumn fx:id="colNombre" prefWidth="140" text="Nombre" />
-                    
                     <TableColumn fx:id="colApellido" prefWidth="140" text="Apellido" />
-                    
                     <TableColumn fx:id="colCorreo" prefWidth="200" text="Correo Electrónico" />
                 </columns>
             </TableView>
